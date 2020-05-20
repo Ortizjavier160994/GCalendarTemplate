@@ -1,10 +1,18 @@
-from flask import Flask, render_template, redirect, url_for
+from flask import Flask, render_template, redirect, url_for, request
+from urllib.parse import quote
 
 app = Flask(__name__)
 
-@app.route("/",methods=["POST","GET"])
+def getEncoded(title,detail):
+	return "https://calendar.google.com/calendar/render?action=TEMPLATE&text=" +\
+		quote(title, safe='') + "&details=" + quote(detail, safe='')
+
+
+@app.route("/",methods=('GET','POST'))
 def home():
-    return render_template("index.html")
+	if (request.method == "POST"):
+		return getEncoded(request.form.get("title"),request.form.get("detail"))
+	return render_template("index.html")
 
 
 if __name__ == "__main__":
