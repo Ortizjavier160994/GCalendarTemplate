@@ -1,15 +1,27 @@
-from flask import Flask, render_template
-app = Flask(__name__)
+from tkinter import *
 
-@app.route('/')
-def index():
-  return render_template('index.html')
+window = Tk()
 
-@app.route('/my-link/')
-def my_link():
-  print ('I got clicked!')
+window.title("Welcome to LikeGeeks app")
 
-  return 'Click.'
+window.geometry('350x200')
 
-if __name__ == '__main__':
-  app.run(debug=True)
+lbl = Label(window, text="Hello")
+
+lbl.grid(column=0, row=0)
+
+txt = Entry(window,width=10)
+
+txt.grid(column=1, row=0)
+
+def clicked():
+
+    res = "Welcome to " + txt.get()
+
+    lbl.configure(text= res)
+
+btn = Button(window, text="Click Me", command=clicked)
+
+btn.grid(column=2, row=0)
+
+window.mainloop()
