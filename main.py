@@ -42,7 +42,7 @@ def send_css(path):
 
 @app.route('/js/<path:path>')
 def send_js(path):
-    return ssend_from_directory(app.config["js"], filename = path, as_attachment=False)
+    return send_from_directory(app.config["js"], filename = path, as_attachment=False)
 
 if __name__ == "__main__":
     app.run(debug=True)
