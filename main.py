@@ -21,7 +21,7 @@ def home():
 		print("submitted")
 		print(request.form.get("start"))
 		print(request.form.get("end"))
-		return getEncoded(request.form.get("title"),request.form.get("detail"))
+		return redirect(getEncoded(request.form.get("title"),request.form.get("detail")))
 	return render_template("index.html")
 
 
