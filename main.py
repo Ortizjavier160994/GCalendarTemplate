@@ -6,7 +6,7 @@ from urllib.parse import quote
 
 app = Flask(__name__, static_url_path='')
 
-app.config["css"] = "/home/mariano/Documents/Heroku/GCalendarTemplate/templates/"
+app.config["css"] = "https://raw.githubusercontent.com/Ortizjavier160994/GCalendarTemplate/master/templates/"
 app.config["js"] = "/home/mariano/Documents/Heroku/GCalendarTemplate/templates/"
 
 Bootstrap(app)
