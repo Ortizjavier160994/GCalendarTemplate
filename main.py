@@ -2,11 +2,15 @@ from flask import Flask, render_template, redirect, url_for, request, send_from_
 from flask_bootstrap import Bootstrap
 from flask_datepicker import datepicker
 from urllib.parse import quote
+import os
 
 
 app = Flask(__name__, static_url_path='')
 
-app.config["css"] = "https://raw.githubusercontent.com/Ortizjavier160994/GCalendarTemplate/master/templates/"
+
+MYDIR = os.path.dirname(__file__)
+
+app.config["css"] = os.path.join(MYDIR + "/templates/")
 app.config["js"] = "/home/mariano/Documents/Heroku/GCalendarTemplate/templates/"
 
 Bootstrap(app)
