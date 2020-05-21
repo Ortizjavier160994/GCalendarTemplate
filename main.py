@@ -11,7 +11,7 @@ app = Flask(__name__, static_url_path='')
 MYDIR = os.path.dirname(__file__)
 
 app.config["css"] = os.path.join(MYDIR + "/templates/")
-app.config["js"] = "/home/mariano/Documents/Heroku/GCalendarTemplate/templates/"
+app.config["js"] = os.path.join(MYDIR + "/templates/")
 
 Bootstrap(app)
 datepicker(app)
