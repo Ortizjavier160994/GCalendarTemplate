@@ -3,7 +3,7 @@ from flask_bootstrap import Bootstrap
 from flask_datepicker import datepicker
 from urllib.parse import quote
 import os
-
+import datetime
 
 app = Flask(__name__, static_url_path='')
 
@@ -16,11 +16,17 @@ app.config["js"] = os.path.join(MYDIR + "/templates/")
 Bootstrap(app)
 datepicker(app)
 
+def formatDate(date):
+	date_time = date.split(" ")
+	d = date_time[0].split("/")
+	t = date_time[1].split(":")
+	return d[2] + d[1] + d[0] + "T" + t[0] + t[1] + t[2] + "Z"
 
-def getEncoded(title,detail):
+def getEncoded(form):
+	dt_start = formatDate(form.get("start"))
+	dt_end = formatDate(form.get("end"))
 	return "https://calendar.google.com/calendar/render?action=TEMPLATE&text=" +\
-		quote(title, safe='') + "&details=" + quote(detail, safe='')
-
+		quote(form.get("title"), safe='') + "&details=" + quote(form.get("detail"), safe='') + "&dates=" + dt_start + "/" + dt_end + "&sf=true"
 
 
 
@@ -29,10 +35,7 @@ def home():
 #	app.send_static_file('./templates/bootstrap-combined.min.css')
 #	send_css('/templates/bootstrap-combined.min.css')
 	if (request.method == "POST"):
-		print("submitted")
-		print(request.form.get("start"))
-		print(request.form.get("end"))
-		return redirect(getEncoded(request.form.get("title"),request.form.get("detail")))
+		return redirect(getEncoded(request.form))
 	return render_template("index.html")
 
 
