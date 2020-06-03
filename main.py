@@ -28,7 +28,7 @@ def getEncoded(form):
 	dt_start = formatDate(form.get("start"))
 	dt_end = formatDate(form.get("end"))
 	return "https://calendar.google.com/calendar/render?action=TEMPLATE&text=" +\
-		quote(form.get("title"), safe='') + "&details=" + quote(form.get("detail"), safe='') + "&dates=" + dt_start + "/" + dt_end + "&sf=true" + "&location=" + form.get("location")
+		quote(form.get("title"), safe='') + "&details=" + quote(form.get("detail"), safe='') + "&dates=" + dt_start + "/" + dt_end + "&sf=true" + "&location=" + quote(form.get("location"),safe='')
 
 
 
