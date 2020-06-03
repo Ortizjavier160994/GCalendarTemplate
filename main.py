@@ -42,7 +42,7 @@ def home():
 
 
 @app.route("/bitly/create/",methods=('GET','POST'))
-def create_bitly():
+def create_bitly(url):
 	if (request.method == "POST"):
 		pass
 	return render_template("create_bitly.html",url = url)
