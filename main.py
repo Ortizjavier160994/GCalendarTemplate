@@ -33,19 +33,21 @@ def getEncoded(form):
 
 @app.route("/bitly/",methods=('GET','POST'))
 def home():
+	global url
 #	app.send_static_file('./templates/bootstrap-combined.min.css')
 #	send_css('/templates/bootstrap-combined.min.css')
 	if (request.method == "POST"):
 		url = getEncoded(request.form)
-		return redirect(url_for("create_bitly",url = url))
+		return redirect("/bitly/create/")
 	return render_template("index.html")
 
 
 @app.route("/bitly/create/",methods=('GET','POST'))
-def create_bitly(url):
+def create_bitly():
+	global url
 	if (request.method == "POST"):
 		pass
-	return render_template("create_bitly.html",url = request.args.get('url'))
+	return render_template("create_bitly.html",url = url)
 
 
 @app.route('/')
