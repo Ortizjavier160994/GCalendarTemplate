@@ -16,6 +16,8 @@ app.config["js"] = os.path.join(MYDIR + "/templates/")
 Bootstrap(app)
 datepicker(app)
 
+url = ""
+
 
 def formatDate(date):
 	date_time = date.split(" ")
