@@ -16,6 +16,7 @@ app.config["js"] = os.path.join(MYDIR + "/templates/")
 Bootstrap(app)
 datepicker(app)
 
+url = ""
 
 def formatDate(date):
 	date_time = date.split(" ")
@@ -36,8 +37,16 @@ def home():
 #	app.send_static_file('./templates/bootstrap-combined.min.css')
 #	send_css('/templates/bootstrap-combined.min.css')
 	if (request.method == "POST"):
-		return redirect(getEncoded(request.form))
+		url = getEncoded(request.form)
+		return redirect("/bitly/create/", url)
 	return render_template("index.html")
+
+
+@app.route("/bitly/create/",methods=('GET','POST'))
+def create_bitly():
+	if (request.method == "POST"):
+		pass
+	return render_template("create_bitly.html")
 
 
 @app.route('/')
