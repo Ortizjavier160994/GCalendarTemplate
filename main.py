@@ -1,6 +1,7 @@
 from flask import Flask, render_template, redirect, url_for, request, send_from_directory
 from flask_bootstrap import Bootstrap
 from flask_datepicker import datepicker
+from flask_oauthlib.provider import OAuth2Provider
 from urllib.parse import quote
 import os
 import datetime
