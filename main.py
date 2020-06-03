@@ -15,6 +15,8 @@ app.config["js"] = os.path.join(MYDIR + "/templates/")
 
 Bootstrap(app)
 datepicker(app)
+oauth = OAuth2Provider(app)
+
 
 def formatDate(date):
 	date_time = date.split(" ")
@@ -26,7 +28,7 @@ def getEncoded(form):
 	dt_start = formatDate(form.get("start"))
 	dt_end = formatDate(form.get("end"))
 	return "https://calendar.google.com/calendar/render?action=TEMPLATE&text=" +\
-		quote(form.get("title"), safe='') + "&details=" + quote(form.get("detail"), safe='') + "&dates=" + dt_start + "/" + dt_end + "&sf=true"
+		quote(form.get("title"), safe='') + "&details=" + quote(form.get("detail"), safe='') + "&dates=" + dt_start + "/" + dt_end + "&sf=true" + "&location=" + form.get("location")
 
 
 
