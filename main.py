@@ -28,7 +28,7 @@ def getEncoded(form):
 	dt_start = formatDate(form.get("start"))
 	dt_end = formatDate(form.get("end"))
 	return "https://calendar.google.com/calendar/render?action=TEMPLATE&text=" +\
-		quote(form.get("title"), safe='') + "&details=" + quote(form.get("detail"), safe='') + "&dates=" + dt_start + "/" + dt_end + "&sf=true" + "&location=" + form.get("location")
+		quote(form.get("title"), safe='') + "&details=" + quote(form.get("detail"), safe='') + "&dates=" + dt_start + "/" + dt_end + "&sf=true" + "&location=" + quote(form.get("location"),safe='')
 
 
 
@@ -38,7 +38,7 @@ def home():
 #	send_css('/templates/bootstrap-combined.min.css')
 	if (request.method == "POST"):
 		url = getEncoded(request.form)
-		return redirect("/bitly/create/", url)
+		return redirect("/bitly/create/")
 	return render_template("index.html")
 
 
@@ -46,7 +46,7 @@ def home():
 def create_bitly():
 	if (request.method == "POST"):
 		pass
-	return render_template("create_bitly.html")
+	return render_template("create_bitly.html",url = url)
 
 
 @app.route('/')
