@@ -37,7 +37,7 @@ def home():
 #	send_css('/templates/bootstrap-combined.min.css')
 	if (request.method == "POST"):
 		url = getEncoded(request.form)
-		return redirect(url_for("/bitly/create/",url = url))
+		return redirect(url_for("create_bitly",url = url))
 	return render_template("index.html")
 
 
