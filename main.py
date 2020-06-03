@@ -1,7 +1,6 @@
 from flask import Flask, render_template, redirect, url_for, request, send_from_directory
 from flask_bootstrap import Bootstrap
 from flask_datepicker import datepicker
-from flask_oauthlib.provider import OAuth2Provider
 from urllib.parse import quote
 import os
 import datetime
@@ -16,7 +15,6 @@ app.config["js"] = os.path.join(MYDIR + "/templates/")
 
 Bootstrap(app)
 datepicker(app)
-oauth = OAuth2Provider(app)
 
 
 def formatDate(date):
@@ -33,13 +31,36 @@ def getEncoded(form):
 
 
 
-@app.route("/",methods=('GET','POST'))
+@app.route("/bitly/",methods=('GET','POST'))
 def home():
 #	app.send_static_file('./templates/bootstrap-combined.min.css')
 #	send_css('/templates/bootstrap-combined.min.css')
 	if (request.method == "POST"):
 		return redirect(getEncoded(request.form))
 	return render_template("index.html")
+
+
+@app.route('/')
+def welcome():
+  return render_template('welcome.html')
+
+@app.route('/oauth/')
+def oauth():
+  code = request.args.get('code')
+  client_id = '162d2656c9c91a22da1002d103a9ce99b18cb1bc'
+  client_secret = 'e7c021443fe87d6c1dc510d3113f35d29c7dd8c4'
+  redirect_uri = 'calendar-template.herokuapp.com/bitly/'
+
+  payload = {'client_id': client_id, 'client_secret': client_secret, 'redirect_uri': redirect_uri, 'code': code}
+  r = requests.post("https://api-ssl.bitly.com/oauth/access_token", data=payload)
+
+  data = {}
+  pairs = r.text.split('&')
+  for pair in pairs:
+    k, v = pair.split('=')
+    data[k] = v
+
+  return render_template('oauth.html', login=data['login'], access_token=data['access_token'])
 
 
 @app.route('/css/<path:path>')
