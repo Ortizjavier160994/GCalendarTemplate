@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, url_for, request, send_from_directory
+from flask import Flask, render_template, redirect, url_for, request, send_from_directory, flash
 from flask_bootstrap import Bootstrap
 from flask_datepicker import datepicker
 from urllib.parse import quote
@@ -42,11 +42,31 @@ def home():
 	return render_template("index.html")
 
 
+	"""
+		{
+		"domain": "bit.ly",
+		"title": "string",
+		"group_guid": "string",
+		"tags": [
+		"string"
+		],
+		"deeplinks": [
+		{}
+		],
+		"long_url": "string"
+		}
+	"""
 @app.route("/bitly/create/",methods=('GET','POST'))
 def create_bitly():
 	global url
 	if (request.method == "POST"):
-		pass
+		payload = {'domain': "bit.ly/"+request.form.get("new_url"), 'title': request.form.get("new_url_title"), 'long_url': url}
+		r = requests.post("https://api-ssl.bitly.com/bitlinks", data=payload)
+		if(r.status_code == 200):
+			flash("Bien ahí perraca", "Success")
+		else:
+			flash("Recalculando", "Danger")
+		return redirect("/bitly/")
 	return render_template("create_bitly.html",url = url)
 
 

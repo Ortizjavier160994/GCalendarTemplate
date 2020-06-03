@@ -3,11 +3,27 @@
 	<form method="post" action="#" >
 	  <p> URL:</p>
 	  <a href="{{url}}"> {{url}}</a>
+	  <p>Titulo en bitly:</p>
+	  <input type="text" name="new_url_title"></ins>
+	  
 	  <p>bit.ly/
 	  <input type="text" name="new_url"></ins>
 	  </p>
   	  <input type="submit" value="Create Bitly!">
 	</form>
 
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+            <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                <span>{{ message }}</span>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
 
  {% endblock %}
