@@ -80,7 +80,7 @@ def create_bitly():
 			flash("Recalculando", "Danger")
 		return redirect("/create-template/")
 	else:
-	return render_template("create_bitly.html",url = url)
+		return render_template("create_bitly.html",url = url)
 
 
 @app.route('/')
