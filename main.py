@@ -90,11 +90,11 @@ def oauth():
   data = {}
   pairs = r.text.split('&')
   for pair in pairs:
-  	try:
-	    k, v = pair.split('=')
-    	data[k] = v
-    except:
-    	continue
+	try:
+		k, v = pair.split('=')
+		data[k] = v
+	except:
+		continue
     
 
   return render_template('oauth.html', login=data['login'], access_token=data['access_token'])
