@@ -8,6 +8,7 @@ import requests
 
 
 app = Flask(__name__, static_url_path='')
+app.secret_key = 'asrtarstaursdlarsn'
 
 
 MYDIR = os.path.dirname(__file__)
