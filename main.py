@@ -70,8 +70,10 @@ def create_bitly():
 		payload = {'domain': "bit.ly/"+request.form.get("new_url"), 'title': request.form.get("new_url_title"), 'long_url': url}
 		headers = {'Authorization' : "Bearer " + api_key}
 		r = requests.post("https://api-ssl.bitly.com/bitlinks", json=payload, headers = headers)
-		print(r.url)
-		print(r.content)
+		print("Url to post",r.request.url)
+		print("Headers:",r.request.headers)
+		print("Data sent:",r.request.data)
+		print("Response content:",r.content)
 		if(r.status_code == 200):
 			flash("Bien ahí perraca", "Success")
 		else:
