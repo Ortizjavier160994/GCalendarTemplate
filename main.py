@@ -33,7 +33,7 @@ def getEncoded(form):
 
 
 
-@app.route("/bitly/",methods=('GET','POST'))
+@app.route("/create-url/",methods=('GET','POST'))
 def home():
 	global url
 #	app.send_static_file('./templates/bootstrap-combined.min.css')
@@ -76,7 +76,7 @@ def create_bitly():
 def welcome():
   return render_template('welcome.html')
 
-@app.route('/oauth/')
+@app.route('/bitly/')
 def oauth():
   code = request.args.get('code')
   client_id = '162d2656c9c91a22da1002d103a9ce99b18cb1bc'
