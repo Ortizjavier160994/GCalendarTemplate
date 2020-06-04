@@ -79,25 +79,23 @@ def welcome():
 
 @app.route('/bitly/')
 def oauth():
-  code = request.args.get('code')
-  client_id = '162d2656c9c91a22da1002d103a9ce99b18cb1bc'
-  client_secret = 'e7c021443fe87d6c1dc510d3113f35d29c7dd8c4'
-  redirect_uri = 'calendar-template.herokuapp.com/bitly/'
+	code = request.args.get('code')
+	client_id = '162d2656c9c91a22da1002d103a9ce99b18cb1bc'
+	client_secret = 'e7c021443fe87d6c1dc510d3113f35d29c7dd8c4'
+	redirect_uri = 'calendar-template.herokuapp.com/bitly/'
 
-  payload = {'client_id': client_id, 'client_secret': client_secret, 'redirect_uri': redirect_uri, 'code': code}
-  r = requests.post("https://api-ssl.bitly.com/oauth/access_token", data=payload)
+	payload = {'client_id': client_id, 'client_secret': client_secret, 'redirect_uri': redirect_uri, 'code': code}
+	r = requests.post("https://api-ssl.bitly.com/oauth/access_token", data=payload)
 
-  data = {}
-  pairs = r.text.split('&')
-  for pair in pairs:
-	try:
-		k, v = pair.split('=')
-		data[k] = v
-	except:
-		continue
-    
-
-  return render_template('oauth.html', login=data['login'], access_token=data['access_token'])
+	data = {}
+	pairs = r.text.split('&')
+	for pair in pairs:
+		try:
+			k, v = pair.split('=')
+			data[k] = v
+		except:
+	  		continue
+	return render_template('oauth.html', login=data['login'], access_token=data['access_token'])
 
 
 @app.route('/css/<path:path>')
