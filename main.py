@@ -89,9 +89,7 @@ def oauth():
 	redirect_uri = 'https://calendar-template.herokuapp.com/bitly/'
 
 	payload = {'client_id': client_id, 'client_secret': client_secret, 'redirect_uri': redirect_uri, 'code': code}
-	r = requests.post("https://api-ssl.bitly.com/oauth/access_token", data=payload)
-//Authorization: Bearer {token}
-	
+	r = requests.post("https://api-ssl.bitly.com/oauth/access_token", data=payload)	
 
 	data = {}
 	pairs = r.text.split('&')
