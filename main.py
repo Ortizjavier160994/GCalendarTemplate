@@ -6,6 +6,7 @@ import os
 import datetime
 import requests
 
+
 app = Flask(__name__, static_url_path='')
 
 
@@ -18,7 +19,7 @@ Bootstrap(app)
 datepicker(app)
 
 url = ""
-
+api_key = ""
 
 def formatDate(date):
 	date_time = date.split(" ")
@@ -34,7 +35,7 @@ def getEncoded(form):
 
 
 
-@app.route("/create-url/",methods=('GET','POST'))
+@app.route("/create-template/",methods=('GET','POST'))
 def home():
 	global url
 #	app.send_static_file('./templates/bootstrap-combined.min.css')
@@ -61,9 +62,10 @@ def home():
 	"""
 @app.route("/bitly/create/",methods=('GET','POST'))
 def create_bitly():
-	global url
+	global url, api_key
 	if (request.method == "POST"):
 		payload = {'domain': "bit.ly/"+request.form.get("new_url"), 'title': request.form.get("new_url_title"), 'long_url': url}
+		headers = {'Authorization': "Bearer " + api_key}
 		r = requests.post("https://api-ssl.bitly.com/bitlinks", data=payload)
 		if(r.status_code == 200):
 			flash("Bien ahí perraca", "Success")
@@ -79,6 +81,7 @@ def welcome():
 
 @app.route('/bitly/')
 def oauth():
+	global api_key
 	code = request.args.get('code')
 	print("Codigo: ", code)
 	client_id = '162d2656c9c91a22da1002d103a9ce99b18cb1bc'
@@ -87,8 +90,8 @@ def oauth():
 
 	payload = {'client_id': client_id, 'client_secret': client_secret, 'redirect_uri': redirect_uri, 'code': code}
 	r = requests.post("https://api-ssl.bitly.com/oauth/access_token", data=payload)
-
-	print (r.content)
+//Authorization: Bearer {token}
+	
 
 	data = {}
 	pairs = r.text.split('&')
@@ -98,7 +101,10 @@ def oauth():
 			data[k] = v
 		except:
 	  		continue
-	return render_template('oauth.html', login=data['login'], access_token=data['access_token'])
+
+	api_key = data["access_token"]
+
+	return redirect("/create-template/")
 
 
 @app.route('/css/<path:path>')
