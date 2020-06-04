@@ -82,8 +82,8 @@ def oauth():
 	code = request.args.get('code')
 	print("Codigo: ", code)
 	client_id = '162d2656c9c91a22da1002d103a9ce99b18cb1bc'
-	client_secret = 'e7c021443fe87d6c1dc510d3113f35d29c7dd8c4'
-	redirect_uri = 'calendar-template.herokuapp.com/bitly/'
+	client_secret = '759c3cbc5fd77a6ddde76ea57faa266797228472'
+	redirect_uri = 'https://calendar-template.herokuapp.com/bitly/'
 
 	payload = {'client_id': client_id, 'client_secret': client_secret, 'redirect_uri': redirect_uri, 'code': code}
 	r = requests.post("https://api-ssl.bitly.com/oauth/access_token", data=payload)
