@@ -74,7 +74,7 @@ def create_bitly():
 			flash("Bien ahí perraca", "Success")
 		else:
 			flash("Recalculando", "Danger")
-		return redirect("/bitly/")
+		return redirect("/create-template/")
 	return render_template("create_bitly.html",url = url)
 
 
