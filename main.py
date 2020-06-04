@@ -80,6 +80,7 @@ def welcome():
 @app.route('/bitly/')
 def oauth():
 	code = request.args.get('code')
+	print("Codigo: ", code)
 	client_id = '162d2656c9c91a22da1002d103a9ce99b18cb1bc'
 	client_secret = 'e7c021443fe87d6c1dc510d3113f35d29c7dd8c4'
 	redirect_uri = 'calendar-template.herokuapp.com/bitly/'
