@@ -69,13 +69,13 @@ def create_bitly():
 	if (request.method == "POST"):
 		#+request.form.get("new_url")
 		payload = {'domain': "bit.ly/"+request.form.get("new_url"), 'title': request.form.get("new_url_title"), 'long_url': url}
-		headers = {'Authorization' : "Bearer " + api_key}
+		headers = {'Authorization' : f"{api_key}"}
 		r = requests.post("https://api-ssl.bitly.com/v4/bitlinks", json=payload, headers = headers)
 		print("Url to post",r.request.url)
 		print("Headers:",r.request.headers)
 		print("Data sent:",r.request.body)
 		print("Response content:",r.content)
-		if(r.status_code == 200):
+		if(r.status_code >= 200 and r.status_code < 300):
 			flash("Bien ahí perraca", "Success")
 		else:
 			flash("Recalculando", "Danger")
