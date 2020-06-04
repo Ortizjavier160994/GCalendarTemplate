@@ -1,18 +1,3 @@
- {% block content %}
-	
-	<form method="post" action="#" >
-	  <p> URL:</p>
-	  <a href="{{url}}"> {{url}}</a>
-	  <p>Titulo en bitly:</p>
-	  <input type="text" name="new_url_title"></ins>
-	  
-	  <p>bit.ly/
-	  <input type="text" name="new_url"></ins>
-	  </p>
-  	  <input type="submit" value="Create Bitly!">
-	</form>
-
-
 {% with messages = get_flashed_messages(with_categories=true) %}
     {% if messages %}
         {% for category, message in messages %}
@@ -26,4 +11,19 @@
     {% endif %}
 {% endwith %}
 
+ {% block content %}
+	
+	<form method="post" action="#" >
+	  <p> URL:</p>
+	  <a href="{{url}}"> {{url}}</a>
+	  <p>Titulo en bitly:
+	  	<input type="text" name="new_url_title"></ins>
+	  </p>
+	  
+	  <p>bit.ly/
+	  <input type="text" name="new_url"></ins>
+	  </p>
+  	  <input type="submit" value="Create Bitly!">
+	</form>
  {% endblock %}
+

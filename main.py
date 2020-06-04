@@ -42,7 +42,7 @@ def home():
 #	send_css('/templates/bootstrap-combined.min.css')
 	if (request.method == "POST"):
 		url = getEncoded(request.form)
-		return redirect("/bitly/create/")
+		return redirect("/create-template/bitly/")
 	return render_template("index.html")
 
 
@@ -60,13 +60,15 @@ def home():
 		"long_url": "string"
 		}
 	"""
-@app.route("/bitly/create/",methods=('GET','POST'))
+@app.route("/create-template/bitly/",methods=('GET','POST'))
 def create_bitly():
-	global url, api_key
+	global url
+	global api_key
+	print(url)
 	if (request.method == "POST"):
 		payload = {'domain': "bit.ly/"+request.form.get("new_url"), 'title': request.form.get("new_url_title"), 'long_url': url}
 		headers = {'Authorization': "Bearer " + api_key}
-		r = requests.post("https://api-ssl.bitly.com/bitlinks", data=payload)
+		r = requests.post("https://api-ssl.bitly.com/bitlinks", data=payload, headers = headers)
 		if(r.status_code == 200):
 			flash("Bien ahí perraca", "Success")
 		else:
