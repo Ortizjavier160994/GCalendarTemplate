@@ -36,16 +36,6 @@ def getEncoded(form):
 
 
 
-@app.route("/create-template/",methods=('GET','POST'))
-def home():
-	global url
-#	app.send_static_file('./templates/bootstrap-combined.min.css')
-#	send_css('/templates/bootstrap-combined.min.css')
-	if (request.method == "POST"):
-		url = getEncoded(request.form)
-		return redirect("/create-template/bitly/")
-	return render_template("index.html")
-
 
 	"""
 		{
@@ -82,6 +72,19 @@ def create_bitly():
 		return redirect("/create-template/")
 	else:
 		return render_template("create_bitly.html",url = url)
+
+
+
+@app.route("/create-template/",methods=('GET','POST'))
+def home():
+#	app.send_static_file('./templates/bootstrap-combined.min.css')
+#	send_css('/templates/bootstrap-combined.min.css')
+	if (request.method == "POST"):
+		global url
+		url = getEncoded(request.form)
+		return redirect("/create-template/bitly/")
+	return render_template("index.html")
+
 
 
 @app.route('/')
