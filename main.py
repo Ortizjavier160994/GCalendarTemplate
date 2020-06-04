@@ -87,6 +87,8 @@ def oauth():
 	payload = {'client_id': client_id, 'client_secret': client_secret, 'redirect_uri': redirect_uri, 'code': code}
 	r = requests.post("https://api-ssl.bitly.com/oauth/access_token", data=payload)
 
+	print (r.content)
+
 	data = {}
 	pairs = r.text.split('&')
 	for pair in pairs:
