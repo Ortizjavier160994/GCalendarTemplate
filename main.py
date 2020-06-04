@@ -67,9 +67,10 @@ def create_bitly():
 	global api_key
 	print(url)
 	if (request.method == "POST"):
-		payload = {'domain': "bit.ly/"+request.form.get("new_url"), 'title': request.form.get("new_url_title"), 'long_url': url}
+		#request.form.get("new_url")
+		payload = {'domain': "bit.ly/", 'title': request.form.get("new_url_title"), 'long_url': url}
 		headers = {'Authorization' : "Bearer " + api_key}
-		r = requests.post("https://api-ssl.bitly.com/bitlinks", json=payload, headers = headers)
+		r = requests.post("https://api-ssl.bitly.com/v4/bitlinks", json=payload, headers = headers)
 		print("Url to post",r.request.url)
 		print("Headers:",r.request.headers)
 		print("Data sent:",r.request.body)
