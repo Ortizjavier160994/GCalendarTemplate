@@ -72,7 +72,7 @@ def create_bitly():
 		r = requests.post("https://api-ssl.bitly.com/bitlinks", json=payload, headers = headers)
 		print("Url to post",r.request.url)
 		print("Headers:",r.request.headers)
-		print("Data sent:",r.request.data)
+		print("Data sent:",r.request.content)
 		print("Response content:",r.content)
 		if(r.status_code == 200):
 			flash("Bien ahí perraca", "Success")
