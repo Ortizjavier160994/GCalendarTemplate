@@ -75,19 +75,18 @@ def create_bitly():
 
 
 
-@app.route("/create-template/",methods=('GET','POST'))
+#create-template/
+@app.route("/",methods=('GET','POST'))
 def home():
 #	app.send_static_file('./templates/bootstrap-combined.min.css')
 #	send_css('/templates/bootstrap-combined.min.css')
 	if (request.method == "POST"):
-		global url
-		url = getEncoded(request.form)
-		return redirect("/create-template/bitly/")
+		return redirect(getEncoded(request.form))
 	return render_template("index.html")
 
 
-
-@app.route('/')
+#ex-home
+@app.route('/notfound')
 def welcome():
   return render_template('welcome.html')
 
