@@ -26,7 +26,7 @@ def formatDate(date):
 	date_time = date.split(" ")
 	d = date_time[0].split("/")
 	t = date_time[1].split(":")
-	return d[2] + d[1] + d[0] + "T" + str(int(t[0])-3) + t[1] + t[2] + "Z"
+	return d[2] + d[1] + d[0] + "T" + str(int(t[0])+3) + t[1] + t[2] + "Z"
 
 def getEncoded(form):
 	dt_start = formatDate(form.get("start"))
